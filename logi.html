@@ -1,11 +1,60 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login Successful</title>
+    <title>Intern Management Dashboard</title>
+
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #c4c9c3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .dashboard {
+            width: 400px;
+            padding: 40px;
+            background-color: rgb(210, 205, 224);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 30px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-    <h2>You are logged in!</h2>
-    <p>Welcome to the Intern Management System.</p>
+
+    <div class="dashboard">
+
+        <h1>Intern Management Dashboard</h1>
+
+        <p>Welcome to the Intern Management System.</p>
+
+        <form action="intern_info.html">
+            <button type="submit">
+                Add Intern Information
+            </button>
+        </form>
+
+    </div>
+
 </body>
 </html>
