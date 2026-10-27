@@ -34,51 +34,75 @@ $result = mysqli_query($conn, $sql);
             background-color: #5b6b5b;
             color: white;
         }
+        .add-btn {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .add-btn button {
+            background-color: #2878c8;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-btn button:hover {
+            background-color: #1d5d9b;
+        }
     </style>
 </head>
 <body>
 
-<h2>All Intern Information</h2>
+    <h2>All Intern Information</h2>
+    <div class="add-btn">
+        <form action="intern_info.html">
+            <button type="submit">
+                Add Intern Information
+            </button>
+        </form>
+    </div>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Full Name</th>
-        <th>Date Of Birth</th>
-        <th>Gender</th>
-        <th>Phone</th>
-        <th>Address</th>
-        <th>University</th>
-        <th>Start Date</th>
-        <th> End Date</th>
-        <th>Status</th>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Date Of Birth</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>University</th>
+            <th>Start Date</th>
+            <th> End Date</th>
+            <th>Status</th>
 
 
-    </tr>
+        </tr>
 
-    <?php
-    while ($r = mysqli_fetch_assoc($result)) {
-        echo "<tr>";
-        echo "<td>" . $r["intern_id"] . "</td>";
-        echo "<td>" . $r["full_name"] . "</td>";
-        echo "<td>" . $r["date_of_birth"] . "</td>";
-        echo "<td>" . $r["gender"] . "</td>";
-        echo "<td>" . $r["phone"] . "</td>";
-        echo "<td>" . $r["address"] . "</td>";
-        echo "<td>" . $r["university"] . "</td>";
-        echo "<td>" . $r["start_date"] . "</td>";
-        echo "<td>" . $r["end_date"] . "</td>";
-        echo "<td>" . $r["status"] . "</td>";
-         echo "<td>
-                <a class='update-btn' href='update_intern.php?id=" . $r["intern_id"] . "'>
-                    Update
-                </a>
-              </td>";
-        echo "</tr>";
-    }
-    ?>
+        <?php
+        while ($r = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $r["intern_id"] . "</td>";
+            echo "<td>" . $r["full_name"] . "</td>";
+            echo "<td>" . $r["date_of_birth"] . "</td>";
+            echo "<td>" . $r["gender"] . "</td>";
+            echo "<td>" . $r["phone"] . "</td>";
+            echo "<td>" . $r["address"] . "</td>";
+            echo "<td>" . $r["university"] . "</td>";
+            echo "<td>" . $r["start_date"] . "</td>";
+            echo "<td>" . $r["end_date"] . "</td>";
+            echo "<td>" . $r["status"] . "</td>";
+            echo "<td>
+                    <a class='update-btn' href='update_intern.php?id=" . $r["intern_id"] . "'>
+                        Update
+                    </a>
+                  </td>";
+            echo "</tr>";
+        }
+        ?>
 
-</table>
+    </table>
 
 </body>
 </html>

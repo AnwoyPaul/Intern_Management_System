@@ -56,7 +56,11 @@ $result = mysqli_query($conn, $sql);
         echo "<td>" . $r["user_id"] . "</td>";
         echo "<td>" . $r["Username"] . "</td>";
         echo "<td>" . $r["Email"] . "</td>";
-        
+        echo "<td>
+                <a class='update-btn' href='update_user.php?id=" . $r["user_id"] . "'>
+                    Update
+                </a>
+              </td>";
         echo "</tr>";
     }
     ?>
