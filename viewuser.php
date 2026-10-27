@@ -34,6 +34,23 @@ $result = mysqli_query($conn, $sql);
             background-color: #5b6b5b;
             color: white;
         }
+        .update-btn {
+            background-color: green;
+            color: white;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .delete-btn {
+            background-color: red;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -56,11 +73,22 @@ $result = mysqli_query($conn, $sql);
         echo "<td>" . $r["user_id"] . "</td>";
         echo "<td>" . $r["Username"] . "</td>";
         echo "<td>" . $r["Email"] . "</td>";
-        echo "<td>
-                <a class='update-btn' href='update_user.php?id=" . $r["user_id"] . "'>
-                    Update
-                </a>
-              </td>";
+       echo "<td>
+                    <a class='update-btn' href='update_user.php?id=" . (int)$r["user_id"] . "'>
+                        Update
+                    </a>
+
+                    &nbsp;
+
+                    <form action='delete_user.php' method='POST' style='display:inline;'>
+                        <input type='hidden' name='user_id' value='" . (int)$r["user_id"] . "'>
+
+                        <button type='submit' name='Delete' value='1' class='delete-btn'
+                            onclick=\"return confirm('Are you sure you want to delete?')\">
+                            Delete
+                        </button>
+                    </form>
+                </td>";
         echo "</tr>";
     }
     ?>

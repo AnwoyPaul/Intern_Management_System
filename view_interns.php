@@ -51,6 +51,21 @@ $result = mysqli_query($conn, $sql);
         .add-btn button:hover {
             background-color: #1d5d9b;
         }
+        .update-btn {
+            background-color: green;
+            color: white;
+            padding: 4px 8px;
+            text-decoration: none;
+            border-radius: 2px;
+        }
+
+        .delete-btn {
+              background-color: red;
+              color: white;
+              padding: 4px px;
+              text-decoration: none;
+              border-radius: 2px;
+        }
     </style>
 </head>
 <body>
@@ -94,9 +109,17 @@ $result = mysqli_query($conn, $sql);
             echo "<td>" . $r["end_date"] . "</td>";
             echo "<td>" . $r["status"] . "</td>";
             echo "<td>
-                    <a class='update-btn' href='update_intern.php?id=" . $r["intern_id"] . "'>
-                        Update
-                    </a>
+                      <a class='update-btn' href='update_intern.php?id=" . (int)$r["intern_id"] . "'<tab>
+                          Update
+                      </a>
+                      &nbsp
+
+                      <form action='delete_intern.php' method='POST' style='display:inline;'class='update-btn'>
+                          <input type='hidden' name='intern_id' value='" . (int)$r["intern_id"] . "'>
+                          <button type='submit' name='Delete' value='1'>
+                              Delete
+                          </button>
+                      </form>
                   </td>";
             echo "</tr>";
         }
