@@ -5,14 +5,14 @@
 
     <style>
         body {
-            font-family: 'Times New Roman', Times, serif;
-            background-color: #c4c9c3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+                font-family: 'Times New Roman', Times, serif;
+                background-color: #c4c9c3;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
 
         form {
             width: 450px;
@@ -22,11 +22,32 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        input, button {
+        input, select, button {
             width: 100%;
             padding: 15px;
             margin: 8px 0;
             box-sizing: border-box;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        input, select {
+            background-color: white;
+            border: 1px solid #999;
+            border-radius: 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            display: block;
+        }
+
+        select {
+            height: 62px;
         }
     </style>
 </head>
@@ -49,11 +70,17 @@
                name="dob"
                required>
 
-        <label for="gender">Gender:</label>
-        <input type="text"
-               id="gender"
-               name="gender"
-               required>
+        
+
+         <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
 
         <label for="phone">Phone:</label>
         <input type="text"
@@ -71,6 +98,12 @@
         <input type="text"
                id="university"
                name="university"
+               required>
+
+        <label for="start_date">Start Date:</label>
+        <input type="date"
+               id="start_date"
+               name="start_date"
                required>
 
         <label for="end_date">End Date:</label>

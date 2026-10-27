@@ -10,6 +10,7 @@
         $phone = $_POST["phone"];
         $address = $_POST["address"];
         $university = $_POST["university"];
+        $start_date = $_POST["start_date"];
         $end_date = $_POST["end_date"];
         $status = $_POST["status"];
 
@@ -20,6 +21,7 @@
             trim($phone) != "" &&
             trim($address) != "" &&
             trim($university) != "" &&
+            trim($start_date) != "" &&
             trim($end_date) != "" &&
             trim($status) != ""
         ) {
@@ -53,7 +55,7 @@
     }
     else {
 
-        header("Location: index.html");
+        header("Location: Register.html");
         exit;
 
     }

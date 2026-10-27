@@ -2,7 +2,7 @@
 
 
 
-         include("database.php");
+     include("database.php");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["sub"])) {
 
@@ -21,7 +21,7 @@
 
             if (mysqli_query($conn, $sql)) {
 
-                header("Location: logi.html");
+                header("Location: login.html");
                 exit;
 
             } else {
@@ -38,7 +38,7 @@
     } 
     else {
 
-        header("Location: index.html");
+        header("Location: Register.html");
         exit;
     }
 
