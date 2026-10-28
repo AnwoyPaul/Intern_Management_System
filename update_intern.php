@@ -35,7 +35,6 @@ if (isset($_POST["update"])) {
     }
 }
 
-
 // FETCH EXISTING DATA
 $id = (int) $_GET["id"];
 
@@ -46,136 +45,146 @@ $result = mysqli_query($conn, $sql);
 $r = mysqli_fetch_assoc($result);
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Update Intern</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Intern - Intern Management System</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            background-color: #c4c9c3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        form {
-            width: 450px;
-            max-width: 100%;
-            padding: 30px;
-            background-color: rgb(210, 205, 224);
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        input, select, textarea, button {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            font-family: inherit;
+        .form-section-title {
             font-size: 16px;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--slate-100);
         }
 
-        input, select, textarea {
-            background-color: white;
-            border: 1px solid #999;
-            border-radius: 5px;
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--slate-100);
         }
 
-        textarea {
+        textarea.form-control {
             min-height: 80px;
             resize: vertical;
         }
-
-        button {
-            background-color: #2878c8;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            margin-bottom: 0;
-        }
-
-        button:hover {
-            background-color: #1d5d9b;
-        }
     </style>
 </head>
-
 <body>
 
-<form method="POST" action="update_intern.php?id=<?php echo $id; ?>">
+    <!-- Navigation Header -->
+    <header class="app-nav">
+        <div class="nav-container">
+            <a href="logi.html" class="nav-brand">
+                <span class="brand-badge" style="width: 36px; height: 36px; margin: 0; border-radius: 8px;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                </span>
+                <span>Intern Management System</span>
+            </a>
+            <nav class="nav-links">
+                <a href="logi.html" class="nav-link">Dashboard</a>
+                <a href="view_interns.php" class="nav-link active">Interns</a>
+                <a href="viewuser.php" class="nav-link">Users</a>
+                <a href="login.html" class="btn btn-secondary btn-sm" style="margin-left: 12px;">Sign Out</a>
+            </nav>
+        </div>
+    </header>
 
-    <h2>Update Intern Information</h2>
+    <main class="app-container">
+        <div class="page-header" style="max-width: 760px; margin: 0 auto 24px auto;">
+            <div>
+                <h1 class="page-title">Update Intern Information</h1>
+                <p class="page-subtitle">Modify details and status for record #<?php echo (int)$r['intern_id']; ?>.</p>
+            </div>
+            <div>
+                <a href="view_interns.php" class="btn btn-secondary btn-sm">
+                    &larr; Back to Directory
+                </a>
+            </div>
+        </div>
 
-    <input type="hidden" name="intern_id"
-           value="<?php echo $r['intern_id']; ?>">
+        <div class="form-card">
+            <form method="POST" action="update_intern.php?id=<?php echo $id; ?>">
 
-    <label>Full Name:</label>
-    <input type="text" name="full_name"
-           value="<?php echo htmlspecialchars($r['full_name']); ?>" required>
+                <input type="hidden" name="intern_id" value="<?php echo $r['intern_id']; ?>">
 
-    <label>Date of Birth:</label>
-    <input type="date" name="date_of_birth"
-           value="<?php echo $r['date_of_birth']; ?>" required>
+                <div class="form-section-title">Personal Information</div>
 
-    <label>Gender:</label>
-    <select name="gender" required>
-        <option value="Male" <?php if ($r['gender'] == 'Male') echo 'selected'; ?>>Male</option>
-        <option value="Female" <?php if ($r['gender'] == 'Female') echo 'selected'; ?>>Female</option>
-        <option value="Other" <?php if ($r['gender'] == 'Other') echo 'selected'; ?>>Other</option>
-    </select>
+                <div class="form-grid">
+                    <div class="form-group col-span-2">
+                        <label for="full_name">Full Name</label>
+                        <input type="text" id="full_name" name="full_name" class="form-control" value="<?php echo htmlspecialchars($r['full_name']); ?>" required>
+                    </div>
 
-    <label>Phone:</label>
-    <input type="text" name="phone"
-           value="<?php echo htmlspecialchars($r['phone']); ?>" required>
+                    <div class="form-group">
+                        <label for="date_of_birth">Date of Birth</label>
+                        <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" value="<?php echo $r['date_of_birth']; ?>" required>
+                    </div>
 
-    <label>Address:</label>
-    <textarea name="address" required><?php echo htmlspecialchars($r['address']); ?></textarea>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" class="form-control" required>
+                            <option value="Male" <?php if ($r['gender'] == 'Male') echo 'selected'; ?>>Male</option>
+                            <option value="Female" <?php if ($r['gender'] == 'Female') echo 'selected'; ?>>Female</option>
+                            <option value="Other" <?php if ($r['gender'] == 'Other') echo 'selected'; ?>>Other</option>
+                        </select>
+                    </div>
 
-    <label>University:</label>
-    <input type="text" name="university"
-           value="<?php echo htmlspecialchars($r['university']); ?>" required>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" name="phone" class="form-control" value="<?php echo htmlspecialchars($r['phone']); ?>" required>
+                    </div>
 
-    <label>Start Date:</label>
-    <input type="date" name="start_date"
-           value="<?php echo $r['start_date']; ?>" required>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" class="form-control" required><?php echo htmlspecialchars($r['address']); ?></textarea>
+                    </div>
+                </div>
 
-    <label>End Date:</label>
-    <input type="date" name="end_date"
-           value="<?php echo $r['end_date']; ?>" required>
+                <div class="form-section-title" style="margin-top: 16px;">Academic & Internship Details</div>
 
-    <label>Status:</label>
-    <input type="text" name="status"
-           value="<?php echo htmlspecialchars($r['status']); ?>" required>
+                <div class="form-grid">
+                    <div class="form-group col-span-2">
+                        <label for="university">University / Institution</label>
+                        <input type="text" id="university" name="university" class="form-control" value="<?php echo htmlspecialchars($r['university']); ?>" required>
+                    </div>
 
-    <button type="submit" name="update">Save Changes</button>
+                    <div class="form-group">
+                        <label for="start_date">Start Date</label>
+                        <input type="date" id="start_date" name="start_date" class="form-control" value="<?php echo $r['start_date']; ?>" required>
+                    </div>
 
-</form>
+                    <div class="form-group">
+                        <label for="end_date">End Date</label>
+                        <input type="date" id="end_date" name="end_date" class="form-control" value="<?php echo $r['end_date']; ?>" required>
+                    </div>
+
+                    <div class="form-group col-span-2">
+                        <label for="status">Internship Status</label>
+                        <input type="text" id="status" name="status" class="form-control" value="<?php echo htmlspecialchars($r['status']); ?>" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="view_interns.php" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" name="update" class="btn btn-primary">
+                        Save Changes
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
 
 </body>
 </html>

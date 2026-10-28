@@ -1,99 +1,174 @@
-
 <?php
 include("database.php");
 
 $sql = "SELECT * FROM users";
 $result = mysqli_query($conn, $sql);
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>All Interns</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users - Intern Management System</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #c4c9c3;
-            padding: 30px;
+        .table-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
-        table {
+        .search-box {
+            position: relative;
+            max-width: 320px;
             width: 100%;
-            border-collapse: collapse;
-            background-color: white;
         }
 
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
+        .search-box input {
+            padding-left: 36px;
         }
 
-        th {
-            background-color: #5b6b5b;
-            color: white;
-        }
-        .update-btn {
-            background-color: green;
-            color: white;
-            padding: 8px 10px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
+        .search-box svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: var(--slate-400);
+            pointer-events: none;
         }
 
-        .delete-btn {
-            background-color: red;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .btn-update {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+        }
+
+        .btn-update:hover {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--slate-500);
         }
     </style>
 </head>
 <body>
 
-<h2>All Users Information</h2>
+    <!-- Navigation Header -->
+    <header class="app-nav">
+        <div class="nav-container">
+            <a href="logi.html" class="nav-brand">
+                <span class="brand-badge" style="width: 36px; height: 36px; margin: 0; border-radius: 8px;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                </span>
+                <span>Intern Management System</span>
+            </a>
+            <nav class="nav-links">
+                <a href="logi.html" class="nav-link">Dashboard</a>
+                <a href="view_interns.php" class="nav-link">Interns</a>
+                <a href="viewuser.php" class="nav-link active">Users</a>
+                <a href="login.html" class="btn btn-secondary btn-sm" style="margin-left: 12px;">Sign Out</a>
+            </nav>
+        </div>
+    </header>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>UserName</th>
-        <th>Email</th>
-        
+    <main class="app-container">
 
+        <!-- Header -->
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">System Users</h1>
+                <p class="page-subtitle">Inspect registered administrative users and account credentials.</p>
+            </div>
+            <div>
+                <a href="Register.html" class="btn btn-primary">
+                    + Add New User
+                </a>
+            </div>
+        </div>
 
-    </tr>
+        <!-- Table Toolbar -->
+        <div class="table-toolbar">
+            <div class="search-box">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="text" id="userSearch" class="form-control" placeholder="Search users by name or email..." onkeyup="filterUsers()">
+            </div>
+        </div>
 
-    <?php
-    while ($r = mysqli_fetch_assoc($result)) {
-        echo "<tr>";
-        echo "<td>" . $r["user_id"] . "</td>";
-        echo "<td>" . $r["Username"] . "</td>";
-        echo "<td>" . $r["Email"] . "</td>";
-       echo "<td>
-                    <a class='update-btn' href='update_user.php?id=" . (int)$r["user_id"] . "'>
-                        Update
-                    </a>
+        <!-- Data Table Card -->
+        <div class="table-card">
+            <div class="table-responsive">
+                <table class="data-table" id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>Email Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            while ($r = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>#" . htmlspecialchars($r["user_id"]) . "</td>";
+                                echo "<td style='font-weight: 600; color: var(--slate-900);'>" . htmlspecialchars($r["Username"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["Email"]) . "</td>";
+                                echo "<td style='white-space: nowrap;'>
+                                        <div class='action-group'>
+                                            <a class='btn btn-sm btn-update' href='update_user.php?id=" . (int)$r["user_id"] . "'>
+                                                Update
+                                            </a>
+                                            <form action='delete_user.php' method='POST' style='display:inline;'>
+                                                <input type='hidden' name='user_id' value='" . (int)$r["user_id"] . "'>
+                                                <button type='submit' name='Delete' value='1' class='btn btn-sm btn-danger'
+                                                    onclick=\"return confirm('Are you sure you want to delete this user?');\">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                      </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4' class='empty-state'>No user accounts found.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-                    &nbsp;
+    </main>
 
-                    <form action='delete_user.php' method='POST' style='display:inline;'>
-                        <input type='hidden' name='user_id' value='" . (int)$r["user_id"] . "'>
-
-                        <button type='submit' name='Delete' value='1' class='delete-btn'
-                            onclick=\"return confirm('Are you sure you want to delete?')\">
-                            Delete
-                        </button>
-                    </form>
-                </td>";
-        echo "</tr>";
-    }
-    ?>
-
-</table>
-
+    <!-- Client-side Instant Filter -->
+    <script>
+        function filterUsers() {
+            const query = document.getElementById('userSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#usersTable tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

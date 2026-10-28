@@ -32,7 +32,7 @@
 
                     VALUES
                     ('$username', '$dob', '$gender', '$phone',
-                     '$address', '$university', CURDATE(),
+                     '$address', '$university', '$start_date',
                      '$end_date', '$status')";
 
             if (mysqli_query($conn, $sql)) {

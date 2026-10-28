@@ -1,4 +1,3 @@
-
 <?php
 include("database.php");
 
@@ -22,7 +21,6 @@ if (isset($_POST["update"])) {
     }
 }
 
-
 // FETCH EXISTING DATA
 if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
     die("Invalid User ID");
@@ -44,102 +42,87 @@ if (!$r) {
     die("User not found");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Update Users</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User - Intern Management System</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            background-color: #c4c9c3;
+        .form-actions {
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        form {
-            width: 450px;
-            max-width: 100%;
-            padding: 30px;
-            background-color: rgb(210, 205, 224);
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        input, button {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            font-family: inherit;
-            font-size: 16px;
-        }
-
-        input {
-            background-color: white;
-            border: 1px solid #999;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #2878c8;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            margin-bottom: 0;
-        }
-
-        button:hover {
-            background-color: #1d5d9b;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--slate-100);
         }
     </style>
 </head>
-
 <body>
 
-<form method="POST" action="update_user.php?id=<?php echo $id; ?>">
+    <!-- Navigation Header -->
+    <header class="app-nav">
+        <div class="nav-container">
+            <a href="logi.html" class="nav-brand">
+                <span class="brand-badge" style="width: 36px; height: 36px; margin: 0; border-radius: 8px;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                </span>
+                <span>Intern Management System</span>
+            </a>
+            <nav class="nav-links">
+                <a href="logi.html" class="nav-link">Dashboard</a>
+                <a href="view_interns.php" class="nav-link">Interns</a>
+                <a href="viewuser.php" class="nav-link active">Users</a>
+                <a href="login.html" class="btn btn-secondary btn-sm" style="margin-left: 12px;">Sign Out</a>
+            </nav>
+        </div>
+    </header>
 
-    <h2>Update User Information</h2>
+    <main class="app-container">
+        <div class="page-header" style="max-width: 520px; margin: 0 auto 24px auto;">
+            <div>
+                <h1 class="page-title">Update User</h1>
+                <p class="page-subtitle">Modify credentials for user #<?php echo (int)$r['user_id']; ?>.</p>
+            </div>
+            <div>
+                <a href="viewuser.php" class="btn btn-secondary btn-sm">
+                    &larr; Back to Users
+                </a>
+            </div>
+        </div>
 
-    <input type="hidden" name="user_id"
-           value="<?php echo $r['user_id']; ?>">
+        <div class="auth-card" style="max-width: 520px; margin: 0 auto; box-shadow: var(--shadow-lg);">
+            <form method="POST" action="update_user.php?id=<?php echo $id; ?>">
 
-    <label>Username:</label>
-    <input type="text" name="username"
-           value="<?php echo htmlspecialchars($r['Username'], ENT_QUOTES, 'UTF-8'); ?>"
-           required>
+                <input type="hidden" name="user_id" value="<?php echo $r['user_id']; ?>">
 
-    <label>Email:</label>
-    <input type="email" name="email"
-           value="<?php echo htmlspecialchars($r['Email'], ENT_QUOTES, 'UTF-8'); ?>"
-           required>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control"
+                           value="<?php echo htmlspecialchars($r['Username'], ENT_QUOTES, 'UTF-8'); ?>" required>
+                </div>
 
-    <button type="submit" name="update">Save Changes</button>
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" name="email" class="form-control"
+                           value="<?php echo htmlspecialchars($r['Email'], ENT_QUOTES, 'UTF-8'); ?>" required>
+                </div>
 
-</form>
+                <div class="form-actions">
+                    <a href="viewuser.php" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" name="update" class="btn btn-primary">
+                        Save Changes
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
 
 </body>
 </html>
