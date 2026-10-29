@@ -23,7 +23,7 @@
                 if($password == $u["Password"])
                   {
                     $_SESSION["user_id"]=$u["user_id"];
-                    header("Location: logi.html");
+                    header("Location: dashboard.html");
                     exit;
                   }
                 else
