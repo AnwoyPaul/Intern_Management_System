@@ -5,6 +5,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["sub"])) {
 
         $username = $_POST["username"];
+        $email=$_POST["email"];
         $dob = $_POST["dob"];
         $gender = $_POST["gender"];
         $phone = $_POST["phone"];
@@ -16,6 +17,7 @@
 
         if (
             trim($username) != "" &&
+            trim($email) != "" &&
             trim($dob) != "" &&
             trim($gender) != "" &&
             trim($phone) != "" &&
@@ -28,12 +30,12 @@
 
             $sql = "INSERT INTO interns
                     (full_name, date_of_birth, gender, phone, address,
-                     university, start_date, end_date, status)
+                     university, start_date, end_date, status,email)
 
                     VALUES
                     ('$username', '$dob', '$gender', '$phone',
                      '$address', '$university', '$start_date',
-                     '$end_date', '$status')";
+                     '$end_date', '$status','$email')";
 
             if (mysqli_query($conn, $sql)) {
 

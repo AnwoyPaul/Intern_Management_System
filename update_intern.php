@@ -1,11 +1,12 @@
 <?php
 include("database.php");
 
-// UPDATE DATA
+
 if (isset($_POST["update"])) {
 
     $id = (int) $_POST["intern_id"];
     $username = $_POST["full_name"];
+    $email=$_POST["email"];
     $dob = $_POST["date_of_birth"];
     $gender = $_POST["gender"];
     $phone = $_POST["phone"];
@@ -17,6 +18,7 @@ if (isset($_POST["update"])) {
 
     $sql = "UPDATE interns SET
                 full_name = '$username',
+                email='$email',
                 date_of_birth = '$dob',
                 gender = '$gender',
                 phone = '$phone',
@@ -124,6 +126,10 @@ $r = mysqli_fetch_assoc($result);
                     <div class="form-group col-span-2">
                         <label for="full_name">Full Name</label>
                         <input type="text" id="full_name" name="full_name" class="form-control" value="<?php echo htmlspecialchars($r['full_name']); ?>" required>
+                    </div>
+                    <div class="form-group col-span-2">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="e.g. simple@gmail.com" required>
                     </div>
 
                     <div class="form-group">

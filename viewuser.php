@@ -88,7 +88,7 @@ $result = mysqli_query($conn, $sql);
         <div class="page-header">
             <div>
                 <h1 class="page-title">System Users</h1>
-                <p class="page-subtitle">Inspect registered administrative users and account credentials.</p>
+                
             </div>
             <div>
                 <a href="Register.html" class="btn btn-primary">
@@ -97,15 +97,7 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
 
-        <!-- Table Toolbar -->
-        <div class="table-toolbar">
-            <div class="search-box">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-                <input type="text" id="userSearch" class="form-control" placeholder="Search users by name or email..." onkeyup="filterUsers()">
-            </div>
-        </div>
+        
 
         <!-- Data Table Card -->
         <div class="table-card">
@@ -155,20 +147,6 @@ $result = mysqli_query($conn, $sql);
     </main>
 
     <!-- Client-side Instant Filter -->
-    <script>
-        function filterUsers() {
-            const query = document.getElementById('userSearch').value.toLowerCase();
-            const rows = document.querySelectorAll('#usersTable tbody tr');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-    </script>
+   
 </body>
 </html>

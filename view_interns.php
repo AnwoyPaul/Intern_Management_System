@@ -92,7 +92,7 @@ $result = mysqli_query($conn, $sql);
         <div class="page-header">
             <div>
                 <h1 class="page-title">Intern Directory</h1>
-                <p class="page-subtitle">Manage registered interns, dates, contact records, and active credentials.</p>
+               
             </div>
             <div>
                 <form action="intern_info.html" style="margin: 0; display: inline;">
@@ -103,15 +103,7 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
 
-        <!-- Table Toolbar -->
-        <div class="table-toolbar">
-            <div class="search-box">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-                <input type="text" id="tableSearch" class="form-control" placeholder="Search interns..." onkeyup="filterInterns()">
-            </div>
-        </div>
+        
 
         <!-- Data Table Card -->
         <div class="table-card">
@@ -121,6 +113,7 @@ $result = mysqli_query($conn, $sql);
                         <tr>
                             <th>ID</th>
                             <th>Full Name</th>
+                            <th>Email</th>
                             <th>Date of Birth</th>
                             <th>Gender</th>
                             <th>Phone</th>
@@ -140,6 +133,7 @@ $result = mysqli_query($conn, $sql);
                                 echo "<tr>";
                                 echo "<td>#" . htmlspecialchars($r["intern_id"]) . "</td>";
                                 echo "<td style='font-weight: 600; color: var(--slate-900);'>" . htmlspecialchars($r["full_name"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["email"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["date_of_birth"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["gender"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["phone"]) . "</td>";
@@ -175,20 +169,6 @@ $result = mysqli_query($conn, $sql);
     </main>
 
     <!-- Client-side Instant Filter -->
-    <script>
-        function filterInterns() {
-            const query = document.getElementById('tableSearch').value.toLowerCase();
-            const rows = document.querySelectorAll('#internsTable tbody tr');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-    </script>
+    
 </body>
 </html>

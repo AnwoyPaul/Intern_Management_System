@@ -1,11 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Intern Management System</title>
     <link rel="stylesheet" href="style.css">
+
     <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .dashboard-main {
+            min-height: calc(100vh - 90px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
         .dashboard-hero {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: #ffffff;
@@ -24,7 +41,11 @@
             right: -10%;
             width: 360px;
             height: 360px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(37, 99, 235, 0) 70%);
+            background: radial-gradient(
+                circle,
+                rgba(37, 99, 235, 0.25) 0%,
+                rgba(37, 99, 235, 0) 70%
+            );
             border-radius: 50%;
             pointer-events: none;
         }
@@ -43,11 +64,16 @@
             line-height: 1.6;
         }
 
+        /* Center both module cards */
         .portal-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 400px));
+            justify-content: center;
+            align-items: stretch;
             gap: 24px;
-            margin-bottom: 32px;
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
         }
 
         .module-card {
@@ -82,6 +108,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .icon-interns {
@@ -146,126 +173,183 @@
             font-weight: 700;
             color: var(--slate-900);
         }
+
+        /* Responsive layout */
+        @media (max-width: 850px) {
+            .portal-grid {
+                grid-template-columns: minmax(0, 400px);
+            }
+
+            .dashboard-main {
+                padding: 30px 15px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <!-- Navigation Header -->
     <header class="app-nav">
         <div class="nav-container">
+
             <a href="logi.html" class="nav-brand">
-                <span class="brand-badge" style="width: 36px; height: 36px; margin: 0; border-radius: 8px;">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+
+                <span class="brand-badge"
+                      style="width: 36px; height: 36px; margin: 0; border-radius: 8px;">
+
+                    <svg fill="none" stroke="currentColor"
+                         viewBox="0 0 24 24"
+                         style="width: 20px; height: 20px;">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                        </path>
                     </svg>
+
                 </span>
+
                 <span>Intern Management System</span>
             </a>
+
             <nav class="nav-links">
-                <a href="logi.html" class="nav-link active">Dashboard</a>
-                <a href="view_interns.php" class="nav-link">Interns</a>
-                <a href="viewuser.php" class="nav-link">Users</a>
-                <a href="login.html" class="btn btn-secondary btn-sm" style="margin-left: 12px;">Sign Out</a>
+                <a href="logi.html" class="nav-link active">
+                    Dashboard
+                </a>
+
+                <a href="view_interns.php" class="nav-link">
+                    Interns
+                </a>
+
+                <a href="viewuser.php" class="nav-link">
+                    Users
+                </a>
+
+                <a href="login.html"
+                   class="btn btn-secondary btn-sm"
+                   style="margin-left: 12px;">
+                    Sign Out
+                </a>
             </nav>
+
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="app-container">
-        
-        <!-- Hero Banner -->
-        <div class="dashboard-hero">
-            <h1 class="hero-title">Internship Operations Portal</h1>
-            <p class="hero-subtitle">
-                Welcome to your administrative command center. Oversee active interns, manage academic tracking, configure profiles, and review system accounts in real-time.
-            </p>
-        </div>
 
-        <!-- Portal Navigation Cards -->
+    <!-- Main Dashboard Content -->
+    <main class="dashboard-main">
+
         <div class="portal-grid">
-            
+
             <!-- Intern Module Card -->
             <div class="module-card">
+
                 <div>
                     <div class="module-header">
+
                         <div class="module-icon icon-interns">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+
+                            <svg fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
                             </svg>
+
                         </div>
+
                         <div>
-                            <h2 class="module-title">Intern Directory</h2>
-                            <span class="badge badge-active">Core Records</span>
+                            <h2 class="module-title">
+                                Intern Directory
+                            </h2>
+
+                            <span class="badge badge-active">
+                                Core Records
+                            </span>
                         </div>
+
                     </div>
-                    <p class="module-desc">
-                        Access full intern profiles, contact information, university affiliations, performance periods, and active internship statuses.
-                    </p>
                 </div>
 
                 <div class="module-actions">
-                    <form action="view_interns.php" style="margin: 0; flex: 1;">
-                        <button type="submit" class="btn btn-primary btn-block">
+
+                    <form action="view_interns.php"
+                          style="margin: 0; flex: 1;">
+
+                        <button type="submit"
+                                class="btn btn-primary btn-block">
                             View Intern Records
                         </button>
+
                     </form>
-                    <a href="intern_info.html" class="btn btn-secondary">
+
+                    <a href="intern_info.html"
+                       class="btn btn-secondary">
                         + Add Intern
                     </a>
+
                 </div>
+
             </div>
+
 
             <!-- User Module Card -->
             <div class="module-card">
+
                 <div>
                     <div class="module-header">
+
                         <div class="module-icon icon-users">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+
+                            <svg fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
                             </svg>
+
                         </div>
+
                         <div>
-                            <h2 class="module-title">System Users</h2>
-                            <span class="badge" style="background-color: #f1f5f9; color: var(--slate-700);">Administration</span>
+                            <h2 class="module-title">
+                                System Users
+                            </h2>
+
+                            <span class="badge"
+                                  style="background-color: #f1f5f9; color: var(--slate-700);">
+                                Administration
+                            </span>
                         </div>
+
                     </div>
-                    <p class="module-desc">
-                        Manage system logins, inspect registered administrator accounts, update credential details, and monitor platform access.
-                    </p>
                 </div>
 
                 <div class="module-actions">
-                    <form action="viewuser.php" style="margin: 0; width: 100%;">
-                        <button type="submit" class="btn btn-secondary btn-block">
+
+                    <form action="viewuser.php"
+                          style="margin: 0; width: 100%;">
+
+                        <button type="submit"
+                                class="btn btn-secondary btn-block">
                             View System Users
                         </button>
+
                     </form>
+
                 </div>
+
             </div>
 
-        </div>
-
-        <!-- Quick Summary Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-label">System Status</div>
-                <div class="stat-value" style="color: var(--success); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                    <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--success); display: inline-block;"></span>
-                    Operational & Connected
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Database Synchronization</div>
-                <div class="stat-value" style="font-size: 16px; color: var(--slate-700);">
-                    MySQL localhost
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Workspace</div>
-                <div class="stat-value" style="font-size: 16px; color: var(--slate-700);">
-                    Intern Management v1.0
-                </div>
-            </div>
         </div>
 
     </main>
