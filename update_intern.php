@@ -8,9 +8,13 @@ if (isset($_POST["update"])) {
     $username = $_POST["full_name"];
     $email=$_POST["email"];
     $dob = $_POST["date_of_birth"];
+    $fathername=$_POST["fathername"];
+    $mothername=$_POST["mothername"];
     $gender = $_POST["gender"];
     $phone = $_POST["phone"];
-    $address = $_POST["address"];
+    $permanentadd = $_POST["permanentadd"];
+    $presentadd = $_POST["presentadd"];
+
     $university = $_POST["university"];
     $start_date = $_POST["start_date"];
     $end_date = $_POST["end_date"];
@@ -20,9 +24,12 @@ if (isset($_POST["update"])) {
                 full_name = '$username',
                 email='$email',
                 date_of_birth = '$dob',
+                fathername='$fathername',
+                mothername='$mothername',
                 gender = '$gender',
                 phone = '$phone',
-                address = '$address',
+                permanentadd = '$permanentadd',
+                presentadd = '$presentadd',
                 university = '$university',
                 start_date = '$start_date',
                 end_date = '$end_date',
@@ -129,12 +136,20 @@ $r = mysqli_fetch_assoc($result);
                     </div>
                     <div class="form-group col-span-2">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="e.g. simple@gmail.com" required>
+                        <input type="email" id="email" name="email" class="form-control" value="<?php echo htmlspecialchars($r['email']); ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="date_of_birth">Date of Birth</label>
                         <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" value="<?php echo $r['date_of_birth']; ?>" required>
+                    </div>
+                    <div class="form-group col-span-2">
+                        <label for="username">Father Name</label>
+                        <input type="text" id="fathername" name="fathername" class="form-control" value="<?php echo htmlspecialchars($r['fathername']); ?>" required>
+                    </div>
+                    <div class="form-group col-span-2">
+                        <label for="username">Mother Name</label>
+                        <input type="text" id="mothername" name="mothername" class="form-control" value="<?php echo htmlspecialchars($r['mothername']); ?>" required>
                     </div>
 
                     <div class="form-group">
@@ -151,10 +166,15 @@ $r = mysqli_fetch_assoc($result);
                         <input type="text" id="phone" name="phone" class="form-control" value="<?php echo htmlspecialchars($r['phone']); ?>" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <textarea id="address" name="address" class="form-control" required><?php echo htmlspecialchars($r['address']); ?></textarea>
+                     <div class="form-group">
+                        <label for="address">Parmanant Address</label>
+                        <input type="text" id="permanentadd" name="permanentadd" class="form-control" value="<?php echo htmlspecialchars($r['permanentadd']); ?>" required>
                     </div>
+                    <div class="form-group">
+                        <label for="address">Present Address</label>
+                        <input type="text" id="presentadd" name="presentadd" class="form-control" value="<?php echo htmlspecialchars($r['presentadd']); ?>" required>
+                    </div>
+
                 </div>
 
                 <div class="form-section-title" style="margin-top: 16px;">Academic & Internship Details</div>
@@ -183,7 +203,7 @@ $r = mysqli_fetch_assoc($result);
 
                 <div class="form-actions">
                     <a href="view_interns.php" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" name="update" class="btn btn-primary">
+                    <button type="submit" name="update" class="btn btn-primary" onclick="return confirm('Are you sure you want to update this intern record?');">
                         Save Changes
                     </button>
                 </div>

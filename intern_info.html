@@ -80,6 +80,14 @@
                         <label for="dob">Date of Birth</label>
                         <input type="date" id="dob" name="dob" class="form-control" required>
                     </div>
+                    <div class="form-group col-span-2">
+                        <label for="username">Father Name</label>
+                        <input type="text" id="fathername" name="fathername" class="form-control" placeholder="e.g. Alexander Hamilton" required>
+                    </div>
+                    <div class="form-group col-span-2">
+                        <label for="username">Mother Name</label>
+                        <input type="text" id="mothername" name="mothername" class="form-control" placeholder="e.g. Alexander Hamilton" required>
+                    </div>
 
                     <div class="form-group">
                         <label for="gender">Gender</label>
@@ -91,14 +99,19 @@
                         </select>
                     </div>
 
+
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
                         <input type="text" id="phone" name="phone" class="form-control" placeholder="e.g. +1 (555) 019-2834" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" id="address" name="address" class="form-control" placeholder="Street, City, Postal Code" required>
+                        <label for="address">Parmanant Address</label>
+                        <input type="text" id="Permanantadd" name="Permanantadd" class="form-control" placeholder="Street, City, Postal Code" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Present Address</label>
+                        <input type="text" id="presentadd" name="presentadd" class="form-control" placeholder="Street, City, Postal Code" required>
                     </div>
                 </div>
 
@@ -128,6 +141,7 @@
 
                 <div class="form-actions">
                     <a href="view_interns.php" class="btn btn-secondary">Cancel</a>
+                    
                     <button type="submit" name="sub" value="sub" class="btn btn-primary">
                         Save Intern Record
                     </button>

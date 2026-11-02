@@ -105,17 +105,21 @@ $result = mysqli_query($conn, $sql);
                 <table class="data-table" id="internsTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                             <th>ID</th>
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Date of Birth</th>
+                            <th>Father Name</th>
+                            <th>Mothername Name</th>
                             <th>Gender</th>
                             <th>Phone</th>
-                            <th>Address</th>
+                            <th>Permanent Address</th>
+                            <th>Present Address</th>
                             <th>University</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Status</th>
+                            <th>Actions</th>
                             
                         </tr>
                     </thead>
@@ -124,14 +128,17 @@ $result = mysqli_query($conn, $sql);
                         if ($result && mysqli_num_rows($result) > 0) {
                             while ($r = mysqli_fetch_assoc($result)) {
                                 $statusClass = (strcasecmp(trim($r["status"]), 'active') === 0) ? 'badge-active' : 'badge-inactive';
-                                echo "<tr>";
+                               echo "<tr>";
                                 echo "<td>#" . htmlspecialchars($r["intern_id"]) . "</td>";
                                 echo "<td style='font-weight: 600; color: var(--slate-900);'>" . htmlspecialchars($r["full_name"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["email"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["date_of_birth"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["fathername"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["mothername"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["gender"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["phone"]) . "</td>";
-                                echo "<td>" . htmlspecialchars($r["address"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["permanentadd"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["presentadd"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["university"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["start_date"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["end_date"]) . "</td>";

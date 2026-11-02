@@ -9,26 +9,35 @@
         $username = $_POST["username"];
         $email = $_POST["email"];
         $password = $_POST["password"];
+        $confirmpassword=$_POST["confirmpassword"];
+
 
         if (
             trim($username) != "" &&
             trim($email) != "" &&
-            trim($password) != ""
+            trim($password) != ""&&
+            trim($confirmpassword) != ""
         ) {
+            if($password==$confirmpassword)
 
-            $sql = "INSERT INTO users (Username, Email, Password)
-                    VALUES ('$username', '$email', '$password')";
+                {    $sql = "INSERT INTO users (Username, Email, Password)
+                            VALUES ('$username', '$email', '$confirmpassword')";
 
-            if (mysqli_query($conn, $sql)) {
+                    if (mysqli_query($conn, $sql)) {
 
-                header("Location: login.html");
-                exit;
+                        header("Location: login.html");
+                        exit;
 
-            } else {
+                    } else {
 
-                echo "Error: " . mysqli_error($conn);
+                        echo "Error: " . mysqli_error($conn);
 
-            }
+                    }
+                }
+            else   {
+                echo "Re Entry Your Password and Confirm Password";
+                //header("Location: Register.html");
+            } 
 
         } else {
 

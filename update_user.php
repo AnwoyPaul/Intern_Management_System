@@ -115,7 +115,7 @@ if (!$r) {
 
                 <div class="form-actions">
                     <a href="viewuser.php" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" name="update" class="btn btn-primary">
+                    <button type="submit" name="update" class="btn btn-primary" onclick="return confirm('Are you sure you want to update this intern record?');">
                         Save Changes
                     </button>
                 </div>

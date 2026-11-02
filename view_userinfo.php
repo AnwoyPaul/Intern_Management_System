@@ -77,7 +77,7 @@ $result = mysqli_query($conn, $sql);
                 <a href="dashboard.html" class="nav-link">Dashboard</a>
                 <a href="view_interninfo.php" class="nav-link">Interns</a>
                 <a href="view_userinfo.php" class="nav-link active">Users</a>
-                <a href="dashboardn.html" class="btn btn-secondary btn-sm" style="margin-left: 12px;">Sign Out</a>
+                <a href="login.html" class="btn btn-secondary btn-sm" style="margin-left: 12px;">Sign Out</a>
             </nav>
         </div>
     </header>

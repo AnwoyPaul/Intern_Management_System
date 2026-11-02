@@ -3,6 +3,10 @@ include("database.php");
 
 $sql = "SELECT * FROM interns";
 $result = mysqli_query($conn, $sql);
+$sql1 = "SELECT COUNT(intern_id) AS total FROM interns";
+$result1 = mysqli_query($conn, $sql1);
+$row = mysqli_fetch_assoc($result1);
+$totalInterns = $row["total"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +96,9 @@ $result = mysqli_query($conn, $sql);
         <div class="page-header">
             <div>
                 <h1 class="page-title">Intern Directory</h1>
-               
+                <h3 class="page-title">
+                        <?php echo "Total Interns: " . $totalInterns; ?>
+                </h3>
             </div>
             <div>
                 <form action="intern_info.html" style="margin: 0; display: inline;">
@@ -115,9 +121,12 @@ $result = mysqli_query($conn, $sql);
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Date of Birth</th>
+                            <th>Father Name</th>
+                            <th>Mothername Name</th>
                             <th>Gender</th>
                             <th>Phone</th>
-                            <th>Address</th>
+                            <th>Permanent Address</th>
+                            <th>Present Address</th>
                             <th>University</th>
                             <th>Start Date</th>
                             <th>End Date</th>
@@ -135,9 +144,12 @@ $result = mysqli_query($conn, $sql);
                                 echo "<td style='font-weight: 600; color: var(--slate-900);'>" . htmlspecialchars($r["full_name"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["email"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["date_of_birth"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["fathername"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["mothername"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["gender"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["phone"]) . "</td>";
-                                echo "<td>" . htmlspecialchars($r["address"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["permanentadd"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($r["presentadd"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["university"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["start_date"]) . "</td>";
                                 echo "<td>" . htmlspecialchars($r["end_date"]) . "</td>";

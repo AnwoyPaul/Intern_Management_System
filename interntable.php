@@ -9,7 +9,10 @@
         $dob = $_POST["dob"];
         $gender = $_POST["gender"];
         $phone = $_POST["phone"];
-        $address = $_POST["address"];
+        $Permanantadd = $_POST["Permanantadd"];//parmanent Address
+        $presentadd = $_POST["presentadd"];//present Address
+        $fathername=$_POST["fathername"];
+        $mothername=$_POST["mothername"];
         $university = $_POST["university"];
         $start_date = $_POST["start_date"];
         $end_date = $_POST["end_date"];
@@ -21,7 +24,10 @@
             trim($dob) != "" &&
             trim($gender) != "" &&
             trim($phone) != "" &&
-            trim($address) != "" &&
+            trim($Permanantadd) != "" &&
+            trim($presentadd) != "" &&
+            trim($fathername) != "" &&
+            trim($mothername) != "" &&
             trim($university) != "" &&
             trim($start_date) != "" &&
             trim($end_date) != "" &&
@@ -29,17 +35,17 @@
         ) {
 
             $sql = "INSERT INTO interns
-                    (full_name, date_of_birth, gender, phone, address,
+                    (full_name, date_of_birth, gender, phone, permanentadd,presentadd,fathername,mothername,
                      university, start_date, end_date, status,email)
 
                     VALUES
                     ('$username', '$dob', '$gender', '$phone',
-                     '$address', '$university', '$start_date',
+                     '$Permanantadd','$presentadd','$fathername','$mothername', '$university', '$start_date',
                      '$end_date', '$status','$email')";
 
             if (mysqli_query($conn, $sql)) {
 
-                header("Location: logi.html");
+                header("Location:view_interns.php");
                 exit;
 
             } else {
